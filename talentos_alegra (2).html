@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talentos con Discapacidad · Alegra</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── Alegra Brand Tokens ───────────────────────────────────────────── */
+:root {
+  --green-brand:    #00D6BC;
+  --green-product:  #30ABA9;
+  --blue-brand:     #18283F;
+  --black-brand:    #0F172A;
+  --light-green:    #CFF2F1;
+  --dark-green:     #00535E;
+  --esmerald:       #50EEA2;
+  --lime:           #B0EE44;
+  --vibrant:        #06ECD0;
+  --bg:             #F8FAFC;
+  --white:          #FFFFFF;
+  --slate-100:      #F1F5F9;
+  --slate-200:      #E2E8F0;
+  --slate-300:      #CBD5E1;
+  --slate-400:      #94A3B8;
+  --slate-500:      #64748B;
+  --slate-600:      #475569;
+  --slate-700:      #334155;
+  --slate-800:      #1E293B;
+
+  /* Category colors */
+  --fisica:         #00D6BC;
+  --auditiva:       #30ABA9;
+  --psico:          #50EEA2;
+  --visual:         #B0EE44;
+  --multiple:       #06ECD0;
+  --intelectual:    #1A7E7F;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--blue-brand);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── Shapes decorativas (brandbook) ── */
+body::before {
+  content: '';
+  position: fixed;
+  top: -60px; right: -60px;
+  width: 160px; height: 160px;
+  background: var(--green-brand);
+  border-radius: 28px;
+  opacity: .18;
+  z-index: 0;
+  pointer-events: none;
+}
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -40px; left: -40px;
+  width: 120px; height: 120px;
+  background: var(--esmerald);
+  border-radius: 22px;
+  opacity: .15;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Layout ── */
+.page { position: relative; z-index: 1; max-width: 1320px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+/* ── Header ── */
+header {
+  background: var(--blue-brand);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+header::before {
+  content: '';
+  position: absolute; top: -80px; right: -80px;
+  width: 320px; height: 320px;
+  background: var(--green-brand);
+  border-radius: 40px;
+  opacity: .12;
+  transform: rotate(15deg);
+}
+header::after {
+  content: '';
+  position: absolute; bottom: -60px; left: 30%;
+  width: 200px; height: 200px;
+  background: var(--esmerald);
+  border-radius: 30px;
+  opacity: .07;
+  transform: rotate(-10deg);
+}
+.header-inner {
+  max-width: 1320px; margin: 0 auto;
+  padding: 2.5rem 2rem 2rem;
+  position: relative; z-index: 1;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  flex-wrap: wrap; gap: 1.5rem;
+}
+.brand-row { display: flex; align-items: center; gap: .6rem; margin-bottom: .75rem; }
+.brand-dot {
+  width: 8px; height: 8px; border-radius: 2px;
+  background: var(--green-brand);
+}
+.brand-label {
+  font-family: 'Lexend', sans-serif;
+  font-size: .7rem; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--green-brand); opacity: .8;
+}
+h1 {
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.05;
+  letter-spacing: -.02em;
+}
+h1 em {
+  font-style: normal;
+  color: var(--green-brand);
+}
+.header-sub {
+  color: var(--slate-400);
+  font-size: .9rem; font-weight: 300;
+  margin-top: .5rem;
+  font-family: 'Lexend', sans-serif;
+}
+.header-kpis { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.kpi-chip {
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(0,214,188,.25);
+  border-radius: 14px;
+  padding: .9rem 1.4rem;
+  text-align: center;
+  backdrop-filter: blur(4px);
+  min-width: 90px;
+}
+.kpi-chip .num {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.7rem; font-weight: 800;
+  color: var(--green-brand);
+  line-height: 1;
+}
+.kpi-chip .lbl {
+  font-size: .65rem; color: var(--slate-400);
+  text-transform: uppercase; letter-spacing: .08em;
+  margin-top: .2rem; font-weight: 500;
+}
+
+/* ── Nav tabs ── */
+.nav-wrap {
+  background: var(--blue-brand);
+  border-top: 1px solid rgba(255,255,255,.07);
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 4px 24px rgba(15,23,42,.35);
+}
+.nav-inner {
+  max-width: 1320px; margin: 0 auto;
+  padding: 0 2rem;
+  display: flex; gap: 0;
+}
+.nav-tab {
+  font-family: 'Lexend', sans-serif;
+  font-size: .82rem; font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--slate-400);
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  border: none; background: none;
+  border-bottom: 3px solid transparent;
+  transition: all .2s;
+  white-space: nowrap;
+}
+.nav-tab:hover { color: var(--white); }
+.nav-tab.active {
+  color: var(--green-brand);
+  border-bottom-color: var(--green-brand);
+}
+
+/* ── Sections ── */
+.section { display: none; padding-top: 2.5rem; }
+.section.active { display: block; }
+
+/* ── Section title ── */
+.section-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--blue-brand);
+  margin-bottom: 1.25rem;
+  display: flex; align-items: center; gap: .5rem;
+}
+.section-title::before {
+  content: '';
+  width: 4px; height: 20px;
+  background: var(--green-brand);
+  border-radius: 2px;
+}
+
+/* ── Charts ── */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+@media(max-width:700px){ .charts-grid { grid-template-columns: 1fr; } }
+
+.chart-card {
+  background: var(--white);
+  border: 1.5px solid var(--slate-200);
+  border-radius: 18px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.chart-card::after {
+  content: '';
+  position: absolute; bottom: -30px; right: -30px;
+  width: 100px; height: 100px;
+  background: var(--light-green);
+  border-radius: 20px;
+  opacity: .5;
+}
+.chart-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: .72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .1em;
+  color: var(--slate-500);
+  margin-bottom: 1.25rem;
+  position: relative; z-index: 1;
+}
+
+/* Donut */
+.donut-wrap {
+  display: flex; align-items: center; gap: 1.5rem;
+  position: relative; z-index: 1;
+  flex-wrap: wrap;
+}
+svg.donut { flex-shrink: 0; }
+.donut-legend { display: flex; flex-direction: column; gap: .55rem; flex: 1; }
+.legend-row {
+  display: flex; align-items: center; gap: .55rem;
+  font-family: 'Lexend', sans-serif; font-size: .78rem;
+}
+.legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+.legend-name { color: var(--blue-brand); font-weight: 500; flex: 1; }
+.legend-val { font-weight: 700; color: var(--dark-green); }
+.legend-pct { color: var(--slate-400); font-size: .7rem; }
+
+/* Bar chart */
+.bar-row {
+  display: flex; align-items: center; gap: .65rem;
+  margin-bottom: .55rem;
+  position: relative; z-index: 1;
+}
+.bar-label { font-family: 'Lexend', sans-serif; font-size: .75rem; font-weight: 500; width: 140px; color: var(--slate-600); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex-shrink: 0; }
+.bar-track { flex: 1; background: var(--slate-100); border-radius: 100px; height: 9px; overflow: hidden; }
+.bar-fill {
+  height: 100%; border-radius: 100px;
+  background: linear-gradient(90deg, var(--green-brand), var(--vibrant));
+  transition: width .6s cubic-bezier(.4,0,.2,1);
+}
+.bar-num { font-family: 'Lexend', sans-serif; font-size: .75rem; font-weight: 700; color: var(--blue-brand); width: 18px; text-align: right; }
+
+/* ── Detail view ── */
+.detail-pills {
+  display: flex; gap: .65rem; flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.detail-pill {
+  display: flex; align-items: center; gap: .5rem;
+  background: var(--white);
+  border: 1.5px solid var(--slate-200);
+  border-radius: 14px;
+  padding: .75rem 1.1rem;
+  cursor: pointer;
+  transition: all .18s;
+  min-width: 140px;
+}
+.detail-pill:hover { border-color: var(--green-brand); transform: translateY(-1px); }
+.detail-pill.active {
+  background: var(--blue-brand);
+  border-color: var(--blue-brand);
+}
+.dp-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; flex-shrink: 0;
+}
+.dp-text .dp-name {
+  font-family: 'Lexend', sans-serif;
+  font-size: .78rem; font-weight: 700;
+  color: var(--blue-brand);
+  line-height: 1.2;
+}
+.detail-pill.active .dp-text .dp-name { color: var(--white); }
+.dp-text .dp-count {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.1rem; font-weight: 800;
+  color: var(--green-brand);
+}
+.dp-text .dp-sub {
+  font-size: .65rem; color: var(--slate-400);
+  font-family: 'Lexend', sans-serif;
+}
+.detail-pill.active .dp-text .dp-sub { color: rgba(255,255,255,.5); }
+
+/* Detail info panel */
+.detail-panel {
+  display: grid; grid-template-columns: 1fr 2fr;
+  gap: 1.25rem; margin-bottom: 2rem;
+}
+@media(max-width:800px){ .detail-panel { grid-template-columns: 1fr; } }
+
+.info-card {
+  background: var(--blue-brand);
+  border-radius: 18px; padding: 1.75rem;
+  color: var(--white);
+  position: relative; overflow: hidden;
+}
+.info-card::before {
+  content: '';
+  position: absolute; top: -40px; right: -40px;
+  width: 140px; height: 140px;
+  background: var(--green-brand);
+  border-radius: 24px; opacity: .12;
+  transform: rotate(20deg);
+}
+.info-card::after {
+  content: '';
+  position: absolute; bottom: -30px; left: 20%;
+  width: 80px; height: 80px;
+  background: var(--esmerald);
+  border-radius: 16px; opacity: .1;
+}
+.info-icon {
+  font-size: 2.2rem; margin-bottom: .75rem;
+  position: relative; z-index: 1;
+}
+.info-name {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.3rem; font-weight: 800;
+  color: var(--green-brand); margin-bottom: .4rem;
+  position: relative; z-index: 1;
+}
+.info-count {
+  font-family: 'Lexend', sans-serif;
+  font-size: 3rem; font-weight: 800;
+  color: var(--white); line-height: 1;
+  margin-bottom: .3rem;
+  position: relative; z-index: 1;
+}
+.info-pct {
+  font-family: 'Lexend', sans-serif;
+  font-size: .8rem; font-weight: 500;
+  color: var(--slate-400);
+  position: relative; z-index: 1;
+}
+.info-bar-wrap { margin-top: 1.25rem; position: relative; z-index: 1; }
+.info-bar-label { font-size: .7rem; color: var(--slate-400); font-family: 'Lexend', sans-serif; margin-bottom: .3rem; }
+.info-bar-track { background: rgba(255,255,255,.12); border-radius: 100px; height: 8px; overflow: hidden; }
+.info-bar-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--green-brand), var(--vibrant)); transition: width .8s ease; }
+
+/* Areas mini-chart in detail */
+.areas-chart-card {
+  background: var(--white);
+  border: 1.5px solid var(--slate-200);
+  border-radius: 18px; padding: 1.5rem;
+}
+
+/* scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--slate-300); border-radius: 3px; }
+
+/* Footer */
+footer {
+  text-align: center; padding: 2.5rem 0 1.5rem;
+  font-size: .75rem; color: var(--slate-400);
+  font-family: 'Lexend', sans-serif;
+  border-top: 1px solid var(--slate-200);
+  margin-top: 3rem;
+}
+footer strong { color: var(--green-brand); }
+</style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header>
+  <div class="header-inner">
+    <div>
+      <div class="brand-row">
+        <div class="brand-dot"></div>
+        <span class="brand-label">Programa de Inclusión · Colombia</span>
+      </div>
+      <h1>Talentos con<br><em>Discapacidad</em></h1>
+      <p class="header-sub">Dashboard de candidatos · Alegra 2026</p>
+    </div>
+    <div class="header-kpis" id="headerKpis">
+      <div class="kpi-chip"><div class="num">64</div><div class="lbl">Candidatos</div></div>
+      <div class="kpi-chip"><div class="num">6</div><div class="lbl">Categorías</div></div>
+      <div class="kpi-chip"><div class="num">11</div><div class="lbl">Áreas</div></div>
+      <div class="kpi-chip"><div class="num">100%</div><div class="lbl">Certificados</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ── Nav ── -->
+<div class="nav-wrap">
+  <div class="nav-inner">
+    <button class="nav-tab active" onclick="switchTab('global', this)">🌐 Vista Global</button>
+    <button class="nav-tab" onclick="switchTab('detail', this)">🔍 Por Discapacidad</button>
+  </div>
+</div>
+
+<div class="page">
+
+<!-- ══════════════════════════════════════════
+     SECCIÓN GLOBAL
+══════════════════════════════════════════ -->
+<div class="section active" id="sec-global">
+
+  <!-- Charts row -->
+  <div class="charts-grid">
+    <!-- Donut -->
+    <div class="chart-card">
+      <div class="chart-title">Distribución por tipo de discapacidad</div>
+      <div class="donut-wrap" id="donutWrap"></div>
+    </div>
+    <!-- Bars áreas -->
+    <div class="chart-card">
+      <div class="chart-title">Áreas de interés (menciones)</div>
+      <div id="areasBar"></div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     SECCIÓN DETALLE
+══════════════════════════════════════════ -->
+<div class="section" id="sec-detail">
+
+  <div class="section-title">Selecciona una categoría de discapacidad</div>
+
+  <!-- Category selector cards -->
+  <div class="detail-pills" id="detailPills"></div>
+
+  <!-- Info panel -->
+  <div class="detail-panel" id="detailPanel"></div>
+
+</div>
+
+</div><!-- /page -->
+
+<footer>
+  Programa de Inclusión · <strong>Alegra</strong> Colombia · Datos 2026 · Generado con Claude
+</footer>
+
+<script>
+/* ────────────────────────────────── DATA ── */
+const DATA = [{"id":1390487,"nombre":"Lilian Paola Vergara Arrieta","categoria":"Auditiva","areas":["Contabilidad","Data & IA"],"vacante":"Business Intelligence Analyst - Sales"},{"id":1928971,"nombre":"Patricia Muñoz Cotera","categoria":"Auditiva","areas":["Talento Humano y Cultura"],"vacante":"People Intern - Medellín (Aprendiz SENA)"},{"id":2031322,"nombre":"Cheryl Ivonne Garay Juliao","categoria":"Auditiva","areas":["Soporte al Cliente"],"vacante":"Tu próximo reto profesional podría estar aquí"},{"id":2506882,"nombre":"Carlos Castaño","categoria":"Psicosocial / Mental","areas":["Soporte al Cliente"],"vacante":"México Customer Support Team Leader"},{"id":3429905,"nombre":"Valeria Andrea Rojano Lafont","categoria":"Física","areas":["Contabilidad"],"vacante":"Tu próximo reto profesional podría estar aquí"},{"id":3941771,"nombre":"Juan Sebastián Salazar Gómez","categoria":"Auditiva","areas":["Multidisciplinario"],"vacante":"Public Relations Specialist - México"},{"id":6284131,"nombre":"andres pinzon","categoria":"Múltiple","areas":["Talento Humano y Cultura","Legal y Admvo."],"vacante":"Tu próximo reto profesional podría estar aquí"},{"id":6418004,"nombre":"JUAN CAMILO JAIMES PEREZ","categoria":"Visual","areas":["Diseño UX/UI"],"vacante":"Programa Inclusión (general)"},{"id":6424756,"nombre":"Cindy Lorena Gómez Jiménez","categoria":"Física","areas":["Talento Humano y Cultura"],"vacante":"Programa Inclusión (general)"},{"id":6428439,"nombre":"Eva María Carrillo Roca","categoria":"Física","areas":["Talento Humano y Cultura"],"vacante":"Programa Inclusión (general)"},{"id":6430553,"nombre":"Karen Martinez Espinal","categoria":"Física","areas":["Talento Humano y Cultura"],"vacante":"Programa Inclusión (general)"},{"id":6430736,"nombre":"David Alejandro Castellanos Gaitán","categoria":"Física","areas":["Soporte al Cliente"],"vacante":"Programa Inclusión (general)"},{"id":6431252,"nombre":"Heidi Paola Sánchez Pérez","categoria":"Física","areas":["Operaciones","Multidisciplinario"],"vacante":"Programa Inclusión (general)"},{"id":6439122,"nombre":"heydy vivianan zorro tunjazipa","categoria":"Auditiva","areas":["Legal y Admvo."],"vacante":"Programa Inclusión (general)"},{"id":6458290,"nombre":"Ricardo Pacheco Rodríguez","categoria":"Física","areas":["Talento Humano y Cultura"],"vacante":"Programa Inclusión (general)"},{"id":6465817,"nombre":"LUIS ALBERTO CRUZ LARA","categoria":"Física","areas":["Operaciones","Multidisciplinario"],"vacante":"Programa Inclusión (general)"},{"id":6558368,"nombre":"Eduart Jiménez Colorado","categoria":"Física","areas":["Legal y Admvo."],"vacante":"Legal Analyst Jr."},{"id":6567841,"nombre":"vanessa zapata calle","categoria":"Visual","areas":["Talento Humano y Cultura","Multidisciplinario"],"vacante":"Programa Inclusión (general)"},{"id":6658351,"nombre":"Marcela Utima","categoria":"Física","areas":["Talento Humano y Cultura"],"vacante":"Programa Inclusión (general)"},{"id":6703202,"nombre":"Gabriel Rinta","categoria":"Intelectual / Cognitiva","areas":["Soporte al Cliente"],"vacante":"Programa Inclusión (general)"},{"id":6738168,"nombre":"Luis alejandro Caro parra","categoria":"Auditiva","areas":["Talento Humano y Cultura","Legal y Admvo.","Operaciones","Marketing","Ventas","Multidisciplinario"],"vacante":"Programa Inclusión (general)"},{"id":6755505,"nombre":"Daniela Manotas Llinás","categoria":"Psicosocial / Mental","areas":["Talento Humano y Cultura","Soporte al Cliente","Marketing","Multidisciplinario"],"vacante":"Programa Inclusión (general)"},{"id":6783787,"nombre":"Maria Camila Martinez Cardona","categoria":"Física","areas":["Talento Humano y Cultura"],"vacante":"Programa Inclusión (general)"},{"id":6784475,"nombre":"Nayely Carolina Patiño Colmenares","categoria":"Física","areas":["Talento Humano y Cultura","Soporte al Cliente","Marketing"],"vacante":"Programa Inclusión (general)"},{"id":6836676,"nombre":"Lina Rocio Castelblanco Vargas","categoria":"Física","areas":["Multidisciplinario"],"vacante":"Programa Inclusión (general)"},{"id":6878432,"nombre":"CATALINA SUAZA MARTÍNEZ","categoria":"Física","areas":["Legal y Admvo."],"vacante":"Programa Inclusión (general)"},{"id":6926072,"nombre":"Juan Sebastián Galán Vargas","categoria":"Física","areas":["Marketing"],"vacante":"Programa Inclusión (general)"},{"id":6957134,"nombre":"Danna Gabriela Garcia Osorio","categoria":"Física","areas":["Talento Humano y Cultura"],"vacante":"Programa Inclusión (general)"},{"id":7108657,"nombre":"Katherine Gualtero Castañeda","categoria":"Psicosocial / Mental","areas":["Soporte al Cliente"],"vacante":"Programa Inclusión (general)"},{"id":7133453,"nombre":"Astrid Lorena Macana Acevedo","categoria":"Física","areas":["Multidisciplinario"],"vacante":"Programa Inclusión (general)"},{"id":7142588,"nombre":"Martha Jineth Canro Londoño","categoria":"Física","areas":["Soporte al Cliente"],"vacante":"Programa Inclusión (general)"},{"id":7145708,"nombre":"Oscar Linares E","categoria":"Auditiva","areas":["Ingeniería y Dev","Marketing","Diseño UX/UI","Multidisciplinario"],"vacante":"Programa Inclusión (general)"},{"id":7152006,"nombre":"ROSSANA SALCEDO HUERTAS","categoria":"Física","areas":["Talento Humano y Cultura","Legal y Admvo."],"vacante":"Programa Inclusión (general)"},{"id":7155887,"nombre":"Angie Catherine velasquez","categoria":"Auditiva","areas":["Talento Humano y Cultura","Legal y Admvo."],"vacante":"Programa Inclusión (general)"},{"id":7170522,"nombre":"William Alejandro Lopez Avellaneda","categoria":"Psicosocial / Mental","areas":["Operaciones"],"vacante":"Programa Inclusión (general)"},{"id":7190241,"nombre":"Luisa Fernanda Gaitan Gallego","categoria":"Física","areas":["Talento Humano y Cultura"],"vacante":"Programa Inclusión (general)"},{"id":7203091,"nombre":"Diana Carolina Mora Rios","categoria":"Física","areas":["Legal y Admvo."],"vacante":"Programa Inclusión (general)"},{"id":7272419,"nombre":"Carlos Fernando Carmona Patiño","categoria":"Psicosocial / Mental","areas":["Talento Humano y Cultura","Legal y Admvo.","Operaciones","Data & IA","Ventas"],"vacante":"Programa Inclusión (general)"},{"id":7292875,"nombre":"EDWAR JULIAN BUITRAGO CHICA","categoria":"Física","areas":["Talento Humano y Cultura"],"vacante":"Programa Inclusión (general)"},{"id":7344380,"nombre":"Jinneth Bazzani","categoria":"Múltiple","areas":["Soporte al Cliente"],"vacante":"Programa Inclusión (general)"},{"id":7366473,"nombre":"Johan David Echeverry Antia","categoria":"Física","areas":["Talento Humano y Cultura"],"vacante":"Programa Inclusión (general)"},{"id":7383456,"nombre":"Jean Dany Alvarez Ordoñez","categoria":"Visual","areas":["Talento Humano y Cultura"],"vacante":"Programa Inclusión (general)"},{"id":7577982,"nombre":"Angel De Jesús Rodelo Herrera","categoria":"Múltiple","areas":["Ingeniería y Dev"],"vacante":"Programa Inclusión (general)"},{"id":7578645,"nombre":"Juan Andre Pencue Avila","categoria":"Auditiva","areas":["Contabilidad"],"vacante":"Programa Inclusión (general)"},{"id":7595571,"nombre":"Maribel Cotrino Bobadilla","categoria":"Física","areas":["Talento Humano y Cultura"],"vacante":"Programa Inclusión (general)"},{"id":7614657,"nombre":"Laura karina Ordoñez melo","categoria":"Visual","areas":["Talento Humano y Cultura"],"vacante":"Programa Inclusión (general)"},{"id":7617918,"nombre":"Lina Marcela Garcia Hurtado","categoria":"Auditiva","areas":["Data & IA"],"vacante":"Programa Inclusión (general)"},{"id":7623558,"nombre":"Johanna Raquel Gallardo Estupiñan","categoria":"Física","areas":["Multidisciplinario"],"vacante":"Programa Inclusión (general)"},{"id":7623565,"nombre":"Tatiana Suárez","categoria":"Física","areas":["Soporte al Cliente"],"vacante":"Programa Inclusión (general)"},{"id":7631419,"nombre":"Mayerly Yuliza Gallardo Santos","categoria":"Física","areas":["Soporte al Cliente"],"vacante":"Programa Inclusión (general)"},{"id":7640909,"nombre":"edgar velandia","categoria":"Física","areas":["Talento Humano y Cultura"],"vacante":"Programa Inclusión (general)"},{"id":7672486,"nombre":"Santiago Ramirez","categoria":"Física","areas":["Operaciones"],"vacante":"Programa Inclusión (general)"},{"id":7682052,"nombre":"Alejandro Ramírez Ramírez","categoria":"Psicosocial / Mental","areas":["Ingeniería y Dev"],"vacante":"Programa Inclusión (general)"},{"id":7696663,"nombre":"DANIEL ALEJANDRO CRUZ VARGAS","categoria":"Física","areas":["Ingeniería y Dev"],"vacante":"Programa Inclusión (general)"},{"id":7704207,"nombre":"Lina Paola Piñeros Ramirez","categoria":"Física","areas":["Talento Humano y Cultura","Multidisciplinario"],"vacante":"Programa Inclusión (general)"},{"id":7707276,"nombre":"carlos manrrique","categoria":"Física","areas":["Ingeniería y Dev"],"vacante":"Programa Inclusión (general)"},{"id":7750925,"nombre":"Angelis Catherine Cely Sosa","categoria":"Física","areas":["Talento Humano y Cultura"],"vacante":"Programa Inclusión (general)"},{"id":7875831,"nombre":"EMMANUEL ROA BENITEZ","categoria":"Física","areas":["Operaciones"],"vacante":"Programa Inclusión (general)"},{"id":7878501,"nombre":"Maria Antonia Trochez Tombe","categoria":"Visual","areas":["Ingeniería y Dev","Data & IA","Diseño UX/UI","Ventas"],"vacante":"Programa Inclusión (general)"},{"id":7891938,"nombre":"Camila Sánchez Ramírez","categoria":"Física","areas":["Soporte al Cliente"],"vacante":"Programa Inclusión (general)"},{"id":7953438,"nombre":"Haeth Talu Muñoz Primera","categoria":"Visual","areas":["Talento Humano y Cultura"],"vacante":"Programa Inclusión (general)"},{"id":7994685,"nombre":"Juan Esteban Puerta Ochoa","categoria":"Física","areas":["Legal y Admvo.","Operaciones","Multidisciplinario"],"vacante":"Programa Inclusión (general)"},{"id":8049921,"nombre":"Luzmary Angarita Moisés","categoria":"Física","areas":["Marketing","Data & IA"],"vacante":"Programa Inclusión (general)"},{"id":8052637,"nombre":"Joysi Paez Mangones","categoria":"Física","areas":["Multidisciplinario"],"vacante":"Programa Inclusión (general)"}];
+
+const CAT_META = {
+  'Todos':                  { icon:'🌐', color:'#00D6BC', bg:'#CFF2F1' },
+  'Física':                 { icon:'♿', color:'#00D6BC', bg:'#CFF2F1' },
+  'Auditiva':               { icon:'👂', color:'#30ABA9', bg:'#d0f0ef' },
+  'Psicosocial / Mental':   { icon:'🧠', color:'#1A7E7F', bg:'#c7ecec' },
+  'Visual':                 { icon:'👁️', color:'#50EEA2', bg:'#e0fdf0' },
+  'Múltiple':               { icon:'⚡', color:'#06ECD0', bg:'#d0fbf7' },
+  'Intelectual / Cognitiva':{ icon:'💡', color:'#B0EE44', bg:'#f0fbce' },
+};
+
+const AREA_LABELS = {
+  'Talento Humano': 'Talento Humano y Cultura',
+  'Soporte y Éxito': 'Soporte al Cliente',
+  'Ingeniería': 'Ingeniería y Dev',
+  'Legal': 'Legal y Admvo.',
+  'Operaciones': 'Operaciones',
+  'Marketing': 'Marketing',
+  'Contabilidad': 'Contabilidad',
+  'Ciencia de Datos': 'Data & IA',
+  'Diseño': 'Diseño UX/UI',
+  'Ventas': 'Ventas',
+  'Otra': 'Multidisciplinario',
+};
+
+/* state */
+let dActiveCat = 'Física';
+
+/* ── helpers ── */
+const catColor = c => (CAT_META[c] || CAT_META['Física']).color;
+const catBg    = c => (CAT_META[c] || CAT_META['Física']).bg;
+const catIcon  = c => (CAT_META[c] || CAT_META['Física']).icon;
+
+function areaCountsFor(arr) {
+  const m = {};
+  arr.forEach(c => c.areas.forEach(a => { m[a] = (m[a]||0)+1; }));
+  return m;
+}
+
+function buildDonut() {
+  const cats = Object.keys(CAT_META).filter(k=>k!=='Todos');
+  const counts = cats.map(c=>DATA.filter(d=>d.categoria===c).length);
+  const total = counts.reduce((a,b)=>a+b,0);
+  const R = 60, cx = 70, cy = 70, r = R;
+  const colors = cats.map(c=>CAT_META[c].color);
+  let cumul = 0;
+  const slices = counts.map((cnt,i) => {
+    const frac = cnt/total;
+    const startAngle = cumul * 2 * Math.PI - Math.PI/2;
+    cumul += frac;
+    const endAngle = cumul * 2 * Math.PI - Math.PI/2;
+    const x1 = cx + r * Math.cos(startAngle);
+    const y1 = cy + r * Math.sin(startAngle);
+    const x2 = cx + r * Math.cos(endAngle);
+    const y2 = cy + r * Math.sin(endAngle);
+    const large = frac > .5 ? 1 : 0;
+    return `<path d="M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} Z" fill="${colors[i]}" opacity=".9"/>`;
+  });
+  // hole
+  slices.push(`<circle cx="${cx}" cy="${cy}" r="35" fill="#F8FAFC"/>`);
+  slices.push(`<text x="${cx}" y="${cy-5}" text-anchor="middle" font-family="Lexend" font-size="14" font-weight="800" fill="#18283F">${total}</text>`);
+  slices.push(`<text x="${cx}" y="${cy+10}" text-anchor="middle" font-family="Lexend" font-size="7" fill="#64748B">total</text>`);
+
+  const legend = cats.map((cat,i) => `
+    <div class="legend-row">
+      <div class="legend-dot" style="background:${colors[i]}"></div>
+      <span class="legend-name">${cat}</span>
+      <span class="legend-val">${counts[i]}</span>
+      <span class="legend-pct">(${((counts[i]/total)*100).toFixed(0)}%)</span>
+    </div>`).join('');
+
+  document.getElementById('donutWrap').innerHTML = `
+    <svg class="donut" width="140" height="140" viewBox="0 0 140 140">${slices.join('')}</svg>
+    <div class="donut-legend">${legend}</div>`;
+}
+
+function buildAreasBar() {
+  const map = areaCountsFor(DATA);
+  const sorted = Object.entries(map).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const max = sorted[0][1];
+  document.getElementById('areasBar').innerHTML = sorted.map(([area,cnt])=>`
+    <div class="bar-row">
+      <div class="bar-label" title="${area}">${area}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${(cnt/max*100).toFixed(1)}%"></div></div>
+      <div class="bar-num">${cnt}</div>
+    </div>`).join('');
+}
+
+/* ── DETAIL VIEW ── */
+function buildDetailPills() {
+  const cats = Object.keys(CAT_META).filter(k=>k!=='Todos');
+  const el = document.getElementById('detailPills');
+  el.innerHTML = cats.map(cat => {
+    const cnt = DATA.filter(c=>c.categoria===cat).length;
+    if (cnt===0) return '';
+    const m = CAT_META[cat];
+    return `<div class="detail-pill${cat===dActiveCat?' active':''}" onclick="setDCat('${cat}')" data-dcat="${cat}">
+      <div class="dp-icon" style="background:${m.bg}">${m.icon}</div>
+      <div class="dp-text">
+        <div class="dp-name">${cat}</div>
+        <div class="dp-count">${cnt}</div>
+        <div class="dp-sub">candidatos</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderDetailPanel(cat) {
+  const subset = DATA.filter(c=>c.categoria===cat);
+  const total = DATA.length;
+  const pct = ((subset.length/total)*100).toFixed(1);
+  const m = CAT_META[cat];
+  const areaMap = areaCountsFor(subset);
+  const topAreas = Object.entries(areaMap).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  const maxA = topAreas[0]?.[1] || 1;
+
+  document.getElementById('detailPanel').innerHTML = `
+    <div class="info-card">
+      <div class="info-icon">${m.icon}</div>
+      <div class="info-name">${cat}</div>
+      <div class="info-count">${subset.length}</div>
+      <div class="info-pct">${pct}% del total de candidatos</div>
+      <div class="info-bar-wrap">
+        <div class="info-bar-label">Representación en el programa</div>
+        <div class="info-bar-track">
+          <div class="info-bar-fill" style="width:${pct}%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="areas-chart-card">
+      <div class="chart-title">Áreas de interés · ${cat}</div>
+      ${topAreas.map(([area,cnt])=>`
+        <div class="bar-row">
+          <div class="bar-label">${area}</div>
+          <div class="bar-track"><div class="bar-fill" style="width:${(cnt/maxA*100).toFixed(1)}%;background:linear-gradient(90deg,${m.color},${m.color}aa)"></div></div>
+          <div class="bar-num">${cnt}</div>
+        </div>`).join('')}
+    </div>`;
+}
+
+function renderDetail() {
+  buildDetailPills();
+  renderDetailPanel(dActiveCat);
+}
+
+/* ── Event handlers ── */
+function setDCat(cat) { dActiveCat = cat; renderDetail(); }
+
+function switchTab(tab, btn) {
+  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('sec-'+tab).classList.add('active');
+}
+
+/* ── Init ── */
+buildDonut();
+buildAreasBar();
+renderDetail();
+</script>
+</body>
+</html>
